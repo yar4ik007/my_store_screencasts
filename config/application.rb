@@ -22,5 +22,12 @@ module MyStore
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.generators do |g|
+        g.template_engine :haml
+        g.test_framework :rspec, fixtures: true, views: false
+        #39 эпизод (при генерации новой модели в рспек будет появляться новый файл тестирования для этой модели) 
+        g.fixture_replacement :factory_girl, dir: "spec/factories"
+        #39 эпизод (так же при создании модели будет появляться соотвтствующаяя фабрика) 
+    end
   end
 end

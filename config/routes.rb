@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
+  devise_scope :users do
+    get "/users/sing_out" => "devise/sessions#destroy"
+    get "/users/edit" => "devise/registrations#edit"
+  end
   devise_for :users
+
+
+  resources :items do
+    get :upvote,    on: :member
+    get :expensive, on: :collection
+  end
+  get "admin/users_count" => "admin#users_count"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -13,10 +25,6 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :items do
-    get :upvote,    on: :member
-    get :expensive, on: :collection
-  end
 
   # Example resource route with options:
   #   resources :products do

@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 	before_filter :check_if_admin,	only: [:create, :new, :edit, :update, :destroy]
 
 	def index
-		@items = Item.all
+		@items = Item.where(price: 18000)
 	end
 
 	def show

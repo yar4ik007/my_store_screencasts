@@ -6,15 +6,15 @@
 	    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	    <%= csrf_meta_tags %>
 	</head>
+	
 	<body>
-		<div>
-			<%= link_to "Sing Up", new_user_registration_path %>
-			<%= link_to "Sing In", new_user_session_path %>
-			<%= link_to "Sing Out", destroy_user_session_path %>
+		<div class="sessionInfo">
+			<% if current_user %>
+				<%= current_user.login %> | <%= link_to "Sing out", users_sing_out_path %>
+			<% else %>
+				<%= link_to "Sing in", new_user_session_path %> | <%= link_to "Registration", new_user_registration_path %>
+			<% end %>
 		</div>
-		<div>
-			<%= yield %>
-		</div>
-
+		<%= yield %>
 	</body>
 </html>
